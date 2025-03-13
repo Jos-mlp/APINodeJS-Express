@@ -27,12 +27,19 @@ Esta API REST, desarrollada en Node.js utilizando Express y MySQL, permite gesti
 
     ## Endpoints de la API
 
-    | Método | Ruta                               | Descripción |
-    | POST   | `/clientes`                        | Registra un nuevo cliente. Requiere en el body: `nombre`, `telefono` y `email`.                                                                      |
+| Método | Ruta                               | Descripción                                                                                                                                           |
+|--------|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| POST   | `/clientes`                        | Registra un nuevo cliente. Requiere en el body: `nombre`, `telefono` y `email`.                                                                      |
+| POST   | `/mesas`                           | Registra una nueva mesa. Requiere en el body: `numero` y `capacidad`.                                                                                  |
+| POST   | `/reservas`                        | Crea una nueva reserva. Requiere en el body: `cliente_id`, `mesa_id`, `fecha` (formato YYYY-MM-DD) y `hora` (formato HH:MM:SS).<br>**Validaciones:**<br>- Un cliente solo puede tener una reserva activa en la misma fecha.<br>- Una mesa no puede estar reservada dos veces a la misma hora (siempre que la reserva no esté cancelada). |
+| GET    | `/reservas`                        | Obtiene todas las reservas registradas, incluyendo información del cliente y de la mesa.                                                              |
+| PUT    | `/reservas/{id}`                   | Actualiza el estado de una reserva (valores permitidos: `pendiente`, `confirmada` o `cancelada`).<br>Reemplaza `{id}` por el ID de la reserva.      |
+| DELETE | `/reservas/{id}`                   | Cancela una reserva actualizando su estado a `cancelada`.<br>Reemplaza `{id}` por el ID de la reserva a cancelar.                                       |
+| GET    | `/reservas/disponibilidad`         | Consulta la disponibilidad de mesas para una fecha y hora específica.<br>Requiere pasar los parámetros de query `fecha` (YYYY-MM-DD) y `hora` (HH:MM:SS). |
 
 
-    ## Ejemplo de Prueba con Postman
 
+## Ejemplo de Prueba con Postman
 
 
 ### Probar Endpoints
