@@ -52,6 +52,7 @@ const clientesController = require('../controllers/clientesController');
  *       500:
  *         description: Error al registrar cliente
  */
+
 router.post('/', clientesController.createCliente);
 
 module.exports = router;
